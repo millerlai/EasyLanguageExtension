@@ -1,0 +1,3 @@
+LIBRARY EasyLanguageEncryption
+EXPORTS 
+	IsExtensionReady
