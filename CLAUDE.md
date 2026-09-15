@@ -25,7 +25,7 @@ Output DLL lands in `x64/<Config>/` or `<Config>/` for Win32. No test suite, no 
 - `Encryption.cpp` — the only file with extension logic. Two pieces coexist:
   - A self-contained Windows CryptoAPI (`advapi32`) file-encryption routine (`MyEncryptFile`) using `CALG_RC4` + MD5 password hash. Not currently wired to an export.
   - EasyLanguage-callable exports: `IsExtensionReady`, `AESEncrypt`, `AESDecrypt` (the latter two are stubs returning `NULL`).
-- `EasyLanguageEncryption.def` — **must list every symbol** you want TradeStation to see. Currently only `IsExtensionReady` is exported. Adding a new EL-callable function requires adding its name here and rebuilding. `.def.bak` is a stale version with the old name `IsEncryptionReady`.
+- `EasyLanguageEncryption.def` — **must list every symbol** you want TradeStation to see. Currently only `IsExtensionReady` is exported. Adding a new EL-callable function requires adding its name here and rebuilding.
 - `dllmain.cpp` — standard stub, no per-attach logic.
 - `pch.h` / `pch.cpp` / `framework.h` — precompiled header infrastructure. All `.cpp` files use `pch.h` as PCH (set to `Create` on `pch.cpp`, `Use` elsewhere); `framework.h` pulls in `<windows.h>` with `WIN32_LEAN_AND_MEAN`.
 - `json.h` / `json.cpp` — bundled copy of the json-parser C library (third-party, BSD-style license in the header). Not currently referenced from `Encryption.cpp`. `3rd-party/` contains an additional copy of jsoncpp and json-parser headers that is **not** in the vcxproj — only the top-level `json.cpp`/`json.h` are compiled.
